@@ -9,14 +9,14 @@ public class ButtonControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject stepToggleRsc = (GameObject)Resources.Load("StepToggle");
+		GameObject stepToggleRsc = (GameObject)Resources.Load("Prefab/StepToggle");
 		mPlayerControl = GameObject.Find("PlayerControl");
 
 		mStepToggle = new List<GameObject>(16);
 
 		for (int i = 0; i < 16; i++) {
-			GameObject stepToggle = Instantiate (stepToggleRsc, new Vector3(-300+i*30, 200, 0), Quaternion.identity);
-			stepToggle.transform.SetParent (transform.Find("StepTogglePanel"),false);
+			GameObject stepToggle = Instantiate (stepToggleRsc, new Vector3(-300+i*30, 100, 0), Quaternion.identity);
+			stepToggle.transform.SetParent( /*transform.Find("StepButtonPanel")*/ this.transform, false);
 			mStepToggle.Add(stepToggle);
 
 			Toggle stepToggleA = stepToggle.GetComponent<Toggle>();

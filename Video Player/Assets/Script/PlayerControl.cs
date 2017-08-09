@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour {
 
@@ -12,17 +14,30 @@ public class PlayerControl : MonoBehaviour {
 	private List<GameObject> mTrack;		// 9 display 分 の track
 	private int mCurrentDisplay;			// 操作中のdisplay番号 
 	                                        // -1 は 操作中ではない。 
-	private GameObject mCanvas;
+
+	private GameObject mCanvas;	// いる？
+	private GameObject mStepTogglePanel;
+
 
 	// 左クリックされた場所のオブジェクトを取得
 	public GameObject getClickObject() {
 		GameObject result = null;
 		if(Input.GetMouseButtonDown(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit = new RaycastHit();
-			if (Physics.Raycast(ray, out hit)){
-				result = hit.collider.gameObject;
+// ymiya[
+// image を hit検出
+//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+//			RaycastHit hit = new RaycastHit();
+//			if (Physics.Raycast(ray, out hit)){
+//				result = hit.collider.gameObject;
+//			}
+			PointerEventData pointer = new PointerEventData (EventSystem.current);
+			pointer.position = Input.mousePosition;
+			List<RaycastResult> raycastResult = new List<RaycastResult> ();
+			EventSystem.current.RaycastAll (pointer, raycastResult);
+			if (raycastResult.Count > 0) {
+				result = raycastResult[0].gameObject;
 			}
+// ymiya ]
 		}
 		return result;
 	}
@@ -42,8 +57,9 @@ public class PlayerControl : MonoBehaviour {
 
 		mCurrentDisplay = -1;			// 画面の step button を非表示
 		// step 制御用のボタンが配置された canvas を非表示に。
-		Canvas canvas = mCanvas.GetComponent<Canvas> ();
-		canvas.enabled = false;
+//		Canvas canvas = mCanvas.GetComponent<Canvas> ();
+//		canvas.enabled = false;
+		mStepTogglePanel.SetActive (false);
 	}
 
 	// clock generator が step timing を通知 
@@ -84,7 +100,11 @@ public class PlayerControl : MonoBehaviour {
 			
 		mCanvas = GameObject.Find("Canvas").gameObject;
 		Canvas canvas = mCanvas.GetComponent<Canvas> ();
-		canvas.enabled = false;
+		canvas.enabled = true;
+
+	mStepTogglePanel = GameObject.Find("StepButtonPanel").gameObject;
+	mStepTogglePanel.SetActive (false);
+
 //ymiya[ 
 // 必要ないのでは？
 //		ButtonControl buttonControl = mCanvas.GetComponent<ButtonControl> (); 
@@ -96,11 +116,25 @@ public class PlayerControl : MonoBehaviour {
 	void Update () {
 		GameObject clickObj = getClickObject();
 		if (clickObj != null) {
+//ymiya[
+// 実験コード			
+			if ( clickObj.name == "Panel11RawImage" ) {
+				OpenLoadFileDialog loadFileDlg = clickObj.GetComponent<OpenLoadFileDialog> ();
+				string filePath = "";
+				if (loadFileDlg.Open(ref filePath)) {
+					VideoPlayer videoPlayer = clickObj.GetComponent<VideoPlayer> ();
+					videoPlayer.url = "file://" + filePath;
+					videoPlayer.Play();
+				}
+			}
+//ymiya]
+
 			if (clickObj.name == "Quad22") {
 				mCurrentDisplay = 4;	// 当該画面の step button を表示
-				Canvas canvas = mCanvas.GetComponent<Canvas> ();
-				canvas.enabled = true;
+//				Canvas canvas = mCanvas.GetComponent<Canvas> ();
+//				canvas.enabled = true;
 
+				mStepTogglePanel.SetActive (true);
 				StartCoroutine(StepButtonErase(6.0F)); // 3 sec 後に step button 削除
 //ymiya[
 // 実験コード

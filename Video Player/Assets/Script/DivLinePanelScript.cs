@@ -10,7 +10,7 @@ public class DivLinePanelScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.mPanelObject = GameObject.Find("DivLinePanel");
+		this.mPanelObject = GameObject.Find("Image");
 		this.mPanelOriginalColor = mPanelObject.GetComponent<Image>().color;
 
 	}
