@@ -15,7 +15,7 @@ public class ButtonControl : MonoBehaviour {
 		mStepToggle = new List<GameObject>(16);
 
 		for (int i = 0; i < 16; i++) {
-			GameObject stepToggle = Instantiate (stepToggleRsc, new Vector3(-300+i*30, 100, 0), Quaternion.identity);
+			GameObject stepToggle = Instantiate (stepToggleRsc, new Vector3(-300+i*30, -150, 0), Quaternion.identity);
 			stepToggle.transform.SetParent( /*transform.Find("StepButtonPanel")*/ this.transform, false);
 			mStepToggle.Add(stepToggle);
 
