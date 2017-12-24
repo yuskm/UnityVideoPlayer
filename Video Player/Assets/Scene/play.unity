@@ -328,6 +328,16 @@ Prefab:
       propertyPath: mTrackId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: c11782a1869804888be374d6da6ccb67, type: 2}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: c11782a1869804888be374d6da6ccb67, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -693,6 +703,16 @@ Prefab:
       propertyPath: mTrackId
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 8bdcf40fa28664ec3b246caa82e8906a, type: 2}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 8bdcf40fa28664ec3b246caa82e8906a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -1128,6 +1148,16 @@ Prefab:
       propertyPath: mTrackId
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: d1ed41a0bc51d48949375c0a512bb9f4, type: 2}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: d1ed41a0bc51d48949375c0a512bb9f4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -1482,6 +1512,16 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: fb75049a4dd924e00bcaa5ddd6608a8e, type: 2}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: fb75049a4dd924e00bcaa5ddd6608a8e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -1596,6 +1636,16 @@ Prefab:
       propertyPath: mTrackId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 23a8a511cae67410da770a87f73e1bd0, type: 2}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 23a8a511cae67410da770a87f73e1bd0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -1759,6 +1809,16 @@ Prefab:
       propertyPath: mTrackId
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2dcd18960ef6341619b489ddb546a59e, type: 2}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2dcd18960ef6341619b489ddb546a59e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -1888,6 +1948,16 @@ Prefab:
       propertyPath: mTrackId
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 36c24fc1e679a4c2d9ef5c49e0f56ae4, type: 2}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 36c24fc1e679a4c2d9ef5c49e0f56ae4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -2230,6 +2300,16 @@ Prefab:
       propertyPath: mTrackId
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 0a23ad52c740647f09b1d1d99ea97df9, type: 2}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 0a23ad52c740647f09b1d1d99ea97df9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
@@ -2797,6 +2877,16 @@ Prefab:
       propertyPath: mTrackId
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 328076334115012270, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2609a4c9ddc144ed79c09ab8b85c1375, type: 2}
+    - target: {fileID: 114096537215725378, guid: dcf64b412b7e744aa8cdc1221ad78adf,
+        type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2609a4c9ddc144ed79c09ab8b85c1375, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcf64b412b7e744aa8cdc1221ad78adf, type: 2}
   m_IsPrefabParent: 0
