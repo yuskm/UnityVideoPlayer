@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Video;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class StepSeq : MonoBehaviour {
@@ -22,17 +23,27 @@ public class StepSeq : MonoBehaviour {
 		return mTrackId;
 	}
 
-	// step 毎にコールされる
-	// <delay> sec ずらして、action すること
-	public void OnStep(/*float delay*/) {
+	// - step 毎にコールされる
+	// - <delay> sec ずらして、action すること
+	public void OnStep (/*float delay*/)
+	{
 		if (mStepState [mCounter]) {
-	//		AudioSource audioSource = GetComponent<AudioSource> ();
-	//		audioSource.PlayDelayed (delay);
-			VideoPlayer videoPlayer = GetComponent<VideoPlayer>();
+			//		AudioSource audioSource = GetComponent<AudioSource> ();
+			//		audioSource.PlayDelayed (delay);
+			VideoPlayer videoPlayer = GetComponent<VideoPlayer> ();
 			videoPlayer.Stop ();
-			videoPlayer.Play();
+			videoPlayer.Play ();
 			videoPlayer.isLooping = false;
+		} else {
+			VideoPlayer videoPlayer = GetComponent<VideoPlayer>();
+			RawImage rawImage = GetComponent<RawImage>();
+			if (videoPlayer.frame >= (long)videoPlayer.frameCount) {
+				rawImage.color = new Color (0.0F, 0.0F, 0.0F, 1.0F);
+			} else {
+				rawImage.color = new Color (1.0F, 1.0F, 1.0F, 1.0F);
+			}
 		}
+	
 		if (++mCounter >= mTotalStep) {
 			mCounter = 0;
 		}
@@ -46,7 +57,8 @@ public class StepSeq : MonoBehaviour {
 	public void SetStepState(int idx, bool val) {
 		mStepState[ idx ] = val;    
 	}
-
+	
+	// - audio sequencer を搭載する場合
 //	public void SetupClip(AudioClip audioClip) {   
 //		AudioSource audioSource = gameObject.GetComponent<AudioSource> ();
 //		audioSource.clip = audioClip;
@@ -63,6 +75,6 @@ public class StepSeq : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 	}
 }

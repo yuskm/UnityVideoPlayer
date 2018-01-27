@@ -62,14 +62,6 @@ public class ClickEventHandler : MonoBehaviour, IPointerDownHandler, IPointerUpH
 	{
 		if (mIsPressing) {          //はじめに押した指のみとなる
 			mIsPressing = false;
-
-//ymiya[
-//長押し検出時の処理
-//			mStepTogglePanel.SetActive (true);
-//			StartCoroutine(StepButtonErase(6.0F)); // 3 sec 後に step button 削除
-//			PlayerControl playerControl = mPlayerControl.GetComponent<PlayerControl> (); 
-//			playerControl.SetupTrack(1);
-//ymiya]
 		}
 	}
 

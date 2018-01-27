@@ -21,8 +21,6 @@ public class PlayerControl : MonoBehaviour {
 	private List<GameObject> mScreen;		// 9 screen
 	private int mCurrentDisplay;			// 操作中のdisplay番号 
 	                                        // -1 は 操作中ではない。 
-	private int mCurrentStep;
-	private GameObject mCanvas;	// 必要 
 	private GameObject mStepTogglePanel;
 
 
@@ -54,18 +52,14 @@ public class PlayerControl : MonoBehaviour {
 ////////////////////////////////////////////////////////////////////////
 	// step sequencer の state を view に 渡す際に利用
 	public List<bool> GetStepState(int idx) {
-		return mTrack[mCurrentDisplay].GetComponent<Track> ().GetStepState ();
+		return mTrack[mCurrentDisplay].GetComponent<Track>().GetStepState();
 	}
 
 ////////////////////////////////////////////////////////////////////////
 	// step sequencer の state を view が通知する際に利用する
 	public void SetStepState(int idx, bool val) {
-		mTrack[mCurrentDisplay].GetComponent<Track> ().SetStepState(idx,val);
-		mScreen[mCurrentDisplay].GetComponent<StepSeq> ().SetStepState(idx,val);
-//ymiya[ 2017/12/07
-// - これいらないのでは？
-//		mStepState [mCurrentDisplay] [idx] = val;
-//ymiya]
+		mTrack[mCurrentDisplay].GetComponent<Track>().SetStepState(idx,val);
+		mScreen[mCurrentDisplay].GetComponent<StepSeq>().SetStepState(idx,val);
 	}
 		
 ////////////////////////////////////////////////////////////////////////
@@ -77,13 +71,8 @@ public class PlayerControl : MonoBehaviour {
 		yield return new WaitForSeconds (time);
 		mCurrentDisplay = -1;			// 画面の step button を非表示
 
-//ymiya[ 2017.10.10
-//canvas そのものではなく、 panel のみで制御するように変更した。
-		// step 制御用のボタンが配置された canvas を非表示に。
-//		Canvas canvas = mCanvas.GetComponent<Canvas> ();
-//		canvas.enabled = false;
+		//- canvas そのものではなく、 panel のみで制御するように変更した。
 		mStepTogglePanel.SetActive (false);
-//ymiya]
 	}
 
 ////////////////////////////////////////////////////////////////////////
@@ -96,32 +85,27 @@ public class PlayerControl : MonoBehaviour {
 			mScreen[i].GetComponent<StepSeq>().OnStep();
 //ymiya]
 		}
-
-		mCurrentStep++;
-		if ( mCurrentStep >= 16 ) {
-			mCurrentStep = 0;
-		}
 	}
 
 ////////////////////////////////////////////////////////////////////////
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		mCurrentDisplay = -1;	// どの display も操作中ではない
-		mCurrentStep = 0;
-		mStepState =  new List< List<bool> >( mDisplayCount );
+		mStepState = new List< List<bool> > (mDisplayCount);
 		for (int i = 0; i < mDisplayCount; i++) {
-			List<bool> listA = new List<bool> ( mStepCount );
+			List<bool> listA = new List<bool> (mStepCount);
 			for (int j = 0; j < mStepCount; j++) {
 				listA.Add (false);
 			}
-			mStepState.Add(listA); 
+			mStepState.Add (listA); 
 		}
 //ymiya[ 2017/12/06
 // - audio sequencer 入れる場合は active に
-		GameObject trackRsc = (GameObject)Resources.Load("Prefab/Track");
-		List<AudioClip> audioClip = new List<AudioClip>(mDisplayCount);
-		audioClip.Add( (AudioClip) Resources.Load("HT",typeof(AudioClip) ) );
-		mTrack = new List<GameObject>(mDisplayCount);
+		GameObject trackRsc = (GameObject)Resources.Load ("Prefab/Track");
+		List<AudioClip> audioClip = new List<AudioClip> (mDisplayCount);
+		audioClip.Add ((AudioClip)Resources.Load ("HT", typeof(AudioClip)));
+		mTrack = new List<GameObject> (mDisplayCount);
 		for (int i = 0; i < mDisplayCount; i++) {
 			GameObject track = Instantiate (trackRsc);
 			track.GetComponent<Track> ().SetupClip (audioClip [0]);
@@ -130,33 +114,19 @@ public class PlayerControl : MonoBehaviour {
 //ymiya]
 		
 		// 9 screen object on canvas
-		mScreen = new List<GameObject>(mDisplayCount);
-		mScreen.Add(GameObject.Find ("SplittedScreen11"));
-		mScreen.Add(GameObject.Find ("SplittedScreen12"));
-		mScreen.Add(GameObject.Find ("SplittedScreen13"));
-		mScreen.Add(GameObject.Find ("SplittedScreen21"));
-		mScreen.Add(GameObject.Find ("SplittedScreen22"));
-		mScreen.Add(GameObject.Find ("SplittedScreen23"));
-		mScreen.Add(GameObject.Find ("SplittedScreen31"));
-		mScreen.Add(GameObject.Find ("SplittedScreen32"));
-		mScreen.Add(GameObject.Find ("SplittedScreen33"));
-
-		mCanvas = GameObject.Find("Canvas").gameObject;
-		Canvas canvas = mCanvas.GetComponent<Canvas> ();
-		canvas.enabled = true;
-
-//ymiya[ 2017/12/07
-// - SetActive したいので tranform 
-//		mStepTogglePanel = GameObject.Find("StepButtonPanel").gameObject;
-		mStepTogglePanel = mCanvas.transform.Find("StepButtonPanel").gameObject;
-		mStepTogglePanel.SetActive (false);
-//ymiya]
-
-//ymiya[ 2017/12/06 
-// 必要ないのでは？
-//		ButtonControl buttonControl = mCanvas.GetComponent<ButtonControl> (); 
-//		buttonControl.SetToggleActive (false);
-//ymiya]	
+		mScreen = new List<GameObject> (mDisplayCount);
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				string objectName = string.Format("SplittedScreen{0}{1}",i + 1, j + 1);
+				GameObject screenObj = GameObject.Find(objectName);
+				screenObj.GetComponent<StepSeq>().SetTrackId(i * 3 + j);
+				mScreen.Add(screenObj);
+			}
+		}
+		// - pattern button view
+		GameObject canvasObject = GameObject.Find("Canvas").gameObject;
+		mStepTogglePanel = canvasObject.transform.Find("StepButtonPanel").gameObject;
+		mStepTogglePanel.SetActive(false);
 	}
 
 ////////////////////////////////////////////////////////////////////////
@@ -189,25 +159,20 @@ public class PlayerControl : MonoBehaviour {
 
 			if (stepSeq != null) {
 				int trackId = stepSeq.GetTrackId ();
-				if (trackId >= 0 && trackId <= 8) { 
-					mCurrentDisplay = trackId;	// 当該画面の step button を表示
-					Canvas canvas = mCanvas.GetComponent<Canvas> ();
-					canvas.enabled = true;
-					mStepTogglePanel.SetActive (true);
-					StartCoroutine (StepButtonErase (5.0F)); // 3 sec 後に step button 削除
+				if (trackId >= 0 && trackId <= 8) {
+					// - 当該画面の step button を表示
+					mCurrentDisplay = trackId;	
+
+					// - step sequencer から pattern data を取得し、view へセット
+					ButtonControl buttonControl = mStepTogglePanel.GetComponent<ButtonControl>(); 
+					List<bool> state = stepSeq.GetStepState();
+					buttonControl.SetToggleOn(state);
+				 
+					mStepTogglePanel.SetActive(true);
+					StartCoroutine (StepButtonErase (5.0F)); // 5 sec 後に step button 削除
 				}
 			}
 		}
 	}
-
 ////////////////////////////////////////////////////////////////////////
-	public void SetupTrack(int index) {
-//ymiya[
-// とりあえず、でっち上げ
-// button を active にするタイミングで、current track の state に更新する。
-// current track を切り替えるたびに、このメンバー関数をコールしなければならない。
-		ButtonControl buttonControl = mCanvas.GetComponent<ButtonControl> (); 
-		buttonControl.SetToggleOn (GetStepState(index));
-//ymiya]	
-	}
 }
